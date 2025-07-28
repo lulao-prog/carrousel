@@ -1,70 +1,48 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Carrusel de Blog</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Carrusel Blog</title>
   <style>
+    * { box-sizing: border-box; }
     body {
       font-family: Arial, sans-serif;
-      background: #f0f0f0;
       margin: 0;
-      padding: 0;
+      background: #f0f0f0;
     }
 
-    h2 {
-      text-align: center;
-      margin: 30px 0 10px;
-    }
-
-    .intro {
-      text-align: center;
-      padding: 0 20px 20px;
-      color: #444;
-    }
-
-    .carousel-container {
-      width: 100%;
-      overflow: hidden;
+    .carousel {
       position: relative;
-      padding: 20px;
-      box-sizing: border-box;
-    }
-
-    .carousel-track-wrapper {
+      max-width: 100%;
       overflow: hidden;
+      padding: 20px;
+      background: #fff;
     }
 
     .carousel-track {
       display: flex;
       transition: transform 0.5s ease;
-      will-change: transform;
     }
 
-    .blog-card {
-      flex: 0 0 33.33%;
-      box-sizing: border-box;
+    .carousel-slide {
+      min-width: 33.33%;
       padding: 10px;
     }
 
-    .blog-card a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .blog-image {
+    .carousel-slide img {
       width: 100%;
       height: 200px;
       object-fit: cover;
       border-radius: 10px;
     }
 
-    .blog-title {
-      font-size: 16px;
-      margin: 10px 0 5px;
+    .carousel-slide h3 {
       text-align: center;
+      margin: 10px 0 5px;
     }
 
-    .blog-description {
+    .carousel-slide p {
       font-size: 14px;
       color: #555;
       text-align: justify;
@@ -78,25 +56,21 @@
       background: rgba(0,0,0,0.5);
       color: white;
       border: none;
-      padding: 10px 15px;
+      font-size: 24px;
+      padding: 10px;
       cursor: pointer;
-      z-index: 2;
+      z-index: 1;
     }
 
-    .left-button {
-      left: 10px;
-    }
+    .carousel-button.left { left: 10px; }
+    .carousel-button.right { right: 10px; }
 
-    .right-button {
-      right: 10px;
-    }
-
-    .carousel-indicators {
+    .carousel-dots {
       text-align: center;
       margin-top: 10px;
     }
 
-    .carousel-indicators span {
+    .carousel-dots span {
       display: inline-block;
       width: 10px;
       height: 10px;
@@ -104,30 +78,16 @@
       border-radius: 50%;
       margin: 0 5px;
       cursor: pointer;
-      transition: background 0.3s ease;
     }
 
-    .carousel-indicators .active {
-      background: #555;
+    .carousel-dots .active {
+      background: #333;
     }
 
     @media (max-width: 768px) {
-      .blog-card {
-        flex: 0 0 100%;
+      .carousel-slide {
+        min-width: 100%;
       }
-
-      .blog-image {
-        height: 180px;
-      }
-
-      .blog-title {
-        font-size: 15px;
-      }
-
-      .blog-description {
-        font-size: 13px;
-      }
-
       .carousel-button {
         display: none;
       }
@@ -136,196 +96,113 @@
 </head>
 <body>
 
-  <h2>Últimos Artículos del Blog</h2>
-  <div class="intro">
-    <p>Descubrí nuestras novedades, consejos y artículos destacados. Hacé clic para leer cada nota completa.</p>
-  </div>
-
-  <div class="carousel-container" id="carouselContainer">
-    <button class="carousel-button left-button" onclick="moveCarousel(-1)">‹</button>
-
-    <div class="carousel-track-wrapper" id="carouselWrapper">
-      <div class="carousel-track" id="carouselTrack">
-        
-<div class="blog-card">
-        <a href="https://yaniariadnacomunidad.com/blog/sabias-que-excel-y-power-bi-ya-tienen-inteligencia-artificial-integrada">
-          <img class="blog-image" src="https://lh3.googleusercontent.com/d/1QLvy8KXweqyDci8FvtvsuiZwHXeF6gul" alt="Post 1">
-          <h3 class="blog-title">¿Sabías que Excel y Power BI ya tienen inteligencia artificial integrada?</h3>
-          <p class="blog-description">La inteligencia artificial dejó de ser algo lejano o exclusivo de especialistas.</p>
-        </a>
-      </div>
-
-      <div class="blog-card">
-        <a href="https://yaniariadnacomunidad.com/blog/definir-bien-una-variable-es-un-acto-de-pensamiento-critico">
-          <img class="blog-image" src="https://lh3.googleusercontent.com/d/1qOEejKmOJCtB3--DZCjuAFtXKb2u-2rW" alt="Post 2">
-          <h3 class="blog-title">Definir bien una variable es un acto de pensamiento crítico</h3>
-          <p class="blog-description">Si una #variable está mal definida, no importa cuántos datos tengas: el análisis va a estar sesgado, incompleto o directamente equivocado😯</p>
-        </a>
-      </div>
-
-      <div class="blog-card">
-        <a href="https://yaniariadnacomunidad.com/blog/formato-tabular-que">
-          <img class="blog-image" src="https://lh3.googleusercontent.com/d/1ckMNTBc1woT8itpidYfaLKSkIPw84voD" alt="Post 3">
-          <h3 class="blog-title">Formato Tabular ¿qué?</h3>
-          <p class="blog-description">El formato tabular permite construir modelos escalables, visualizar sin errores y aplicar transformaciones en lote.</p>
-        </a>
-      </div>
-
-      <div class="blog-card">
-        <a href="https://yaniariadnacomunidad.com/blog/que-hacemos-en-power-query">
-          <img class="blog-image" src="https://lh3.googleusercontent.com/d/1lrrGRV0VjrBRK6gAVh3cqN5f4fsKniUJ" alt="Post 4">
-          <h3 class="blog-title">¿Qué hacemos en Power Query?</h3>
-          <p class="blog-description">Power Query se conecta a Excel, carpetas, bases, APIs, lo que sea. Pero lo importante no es solo traer los datos: es arreglar lo que viene mal desde el minuto cero.</p>
-        </a>
-      </div>
-
-      <div class="blog-card">
-        <a href="https://yaniariadnacomunidad.com/blog/power-query-para-excel-y-power-bi">
-          <img class="blog-image" src="https://lh3.googleusercontent.com/d/1pCMGKIhtTITkoVwSxuSI5lyfi9qvj8Tm" alt="Post 5">
-          <h3 class="blog-title">Power Query para Excel y Power BI</h3>
-          <p class="blog-description">Si hacés lo mismo más de dos veces en Excel, es hora de automatizarlo con Power Query.</p>
-        </a>
-      </div>
-
-<div class="blog-card">
-        <a href="https://yaniariadnacomunidad.com/blog/etl-o-elt-la-diferencia-que-puede-cambiar-tus-proyectos-de-datos-para-siempre">
-          <img class="blog-image" src="https://lh3.googleusercontent.com/d/1H-OxohLM02puRkmq0VW88Cv0yOEHi8gS" alt="Post 6">
-          <h3 class="blog-title">Power Query para Excel y Power BI</h3>
-          <p class="blog-description">Si hacés lo mismo más de dos veces en Excel, es hora de automatizarlo con Power Query.</p>
-        </a>
-      </div>
-
-<div class="blog-card">
-        <a href="https://yaniariadnacomunidad.com/blog/mi-flujo-de-trabajo-en-power-bi">
-          <img class="blog-image" src="https://lh3.googleusercontent.com/d/1e14PpCqtFE7_RKp56zilTJ9jOgY4FOmb" alt="Post 7">
-          <h3 class="blog-title">¿ETL o ELT? La diferencia que puede cambiar tus proyectos de datos para siempre</h3>
-          <p class="blog-description">Dos caminos, un mismo objetivo: tener datos listos para decidir. La clave está en el orden: ¿primero limpio o primero cargo?</p>
-        </a>
-      </div>
-
-<div class="blog-card">
-        <a href="https://yaniariadnacomunidad.com/blog/entendamos-la-logica-de-dax">
-          <img class="blog-image" src="https://lh3.googleusercontent.com/d/12kolfaBtlAUTNXAk2DZ3lZy-aRXp2Zdg" alt="Post 8">
-          <h3 class="blog-title">Mi flujo de trabajo en Power BI</h3>
-          <p class="blog-description">El proceso de trabajo en Power BI puede dividirse en 8 etapas principales, desde la conexión a los datos hasta la publicación de reportes interactivos y el feedback que genera.</p>
-        </a>
-      </div>
-
-<div class="blog-card">
-        <a href="https://yaniariadnacomunidad.com/blog/https-yaniariadnacomunidad-com-blog-dax">
-          <img class="blog-image" src="https://lh3.googleusercontent.com/d/1PdGPkbgDBc_BZ8C6hMJ0rzN5yKSJAxcJ" alt="Post 9">
-          <h3 class="blog-title">Entendamos la lógica de DAX en Power BI</h3>
-          <p class="blog-description">Una explicación clara de dos conceptos claves en DAX que transforman por completo la forma en que se entiende un cálculo: las variables y los contextos de evaluación.</p>
-        </a>
-      </div>
-
-      </div>
+<div class="carousel" id="carousel">
+  <button class="carousel-button left" id="prevBtn">‹</button>
+  <div class="carousel-track" id="carouselTrack">
+    <!-- Slides -->
+    <div class="carousel-slide">
+      <a href="#"><img src="https://via.placeholder.com/600x200/1abc9c/ffffff?text=Post+1" alt=""><h3>Post 1</h3><p>Descripción del artículo 1</p></a>
     </div>
-
-    <button class="carousel-button right-button" onclick="moveCarousel(1)">›</button>
+    <div class="carousel-slide">
+      <a href="#"><img src="https://via.placeholder.com/600x200/3498db/ffffff?text=Post+2" alt=""><h3>Post 2</h3><p>Descripción del artículo 2</p></a>
+    </div>
+    <div class="carousel-slide">
+      <a href="#"><img src="https://via.placeholder.com/600x200/e74c3c/ffffff?text=Post+3" alt=""><h3>Post 3</h3><p>Descripción del artículo 3</p></a>
+    </div>
+    <div class="carousel-slide">
+      <a href="#"><img src="https://via.placeholder.com/600x200/9b59b6/ffffff?text=Post+4" alt=""><h3>Post 4</h3><p>Descripción del artículo 4</p></a>
+    </div>
+    <div class="carousel-slide">
+      <a href="#"><img src="https://via.placeholder.com/600x200/f39c12/ffffff?text=Post+5" alt=""><h3>Post 5</h3><p>Descripción del artículo 5</p></a>
+    </div>
   </div>
+  <button class="carousel-button right" id="nextBtn">›</button>
+  <div class="carousel-dots" id="carouselDots"></div>
+</div>
 
-  <div class="carousel-indicators" id="carouselIndicators"></div>
+<script>
+  const track = document.getElementById('carouselTrack');
+  const slides = document.querySelectorAll('.carousel-slide');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const dotsContainer = document.getElementById('carouselDots');
+  const carousel = document.getElementById('carousel');
 
-  <script>
-    const track = document.getElementById("carouselTrack");
-    const container = document.getElementById("carouselContainer");
-    const wrapper = document.getElementById("carouselWrapper");
-    const indicators = document.getElementById("carouselIndicators");
+  let currentIndex = 0;
+  let interval;
+  let visibleSlides = () => window.innerWidth <= 768 ? 1 : 3;
+  let slideWidth = () => slides[0].offsetWidth;
 
-    let cards = track.querySelectorAll(".blog-card");
-    let currentPosition = 0;
-    let autoplayInterval = null;
+  function updateCarousel() {
+    const offset = currentIndex * slideWidth();
+    track.style.transform = `translateX(-${offset}px)`;
+    updateDots();
+  }
 
-    function getVisibleCards() {
-      return window.innerWidth <= 768 ? 1 : 3;
+  function nextSlide() {
+    const totalSlides = slides.length;
+    currentIndex = (currentIndex + visibleSlides()) % totalSlides;
+    updateCarousel();
+  }
+
+  function prevSlide() {
+    const totalSlides = slides.length;
+    currentIndex = (currentIndex - visibleSlides() + totalSlides) % totalSlides;
+    updateCarousel();
+  }
+
+  function createDots() {
+    const count = Math.ceil(slides.length / visibleSlides());
+    dotsContainer.innerHTML = '';
+    for (let i = 0; i < count; i++) {
+      const dot = document.createElement('span');
+      dot.addEventListener('click', () => {
+        currentIndex = i * visibleSlides();
+        updateCarousel();
+      });
+      dotsContainer.appendChild(dot);
     }
+  }
 
-    function updateIndicators() {
-      const visible = getVisibleCards();
-      const totalDots = Math.ceil(cards.length / visible);
-      indicators.innerHTML = "";
+  function updateDots() {
+    const dots = dotsContainer.querySelectorAll('span');
+    dots.forEach(dot => dot.classList.remove('active'));
+    const activeIndex = Math.floor(currentIndex / visibleSlides());
+    if (dots[activeIndex]) dots[activeIndex].classList.add('active');
+  }
 
-      for (let i = 0; i < totalDots; i++) {
-        const dot = document.createElement("span");
-        if (i === Math.floor(currentPosition / visible)) {
-          dot.classList.add("active");
-        }
-        dot.addEventListener("click", () => {
-          currentPosition = i * visible;
-          moveCarousel(0);
-        });
-        indicators.appendChild(dot);
-      }
-    }
+  function startAutoplay() {
+    interval = setInterval(nextSlide, 4000);
+  }
 
-    function moveCarousel(direction) {
-      const cardWidth = cards[0].offsetWidth;
-      const visibleCards = getVisibleCards();
-      const maxPosition = cards.length - visibleCards;
+  function stopAutoplay() {
+    clearInterval(interval);
+  }
 
-      if (direction !== 0) {
-        currentPosition += direction;
+  // Swipe en celular
+  let startX = 0;
+  track.addEventListener('touchstart', e => startX = e.touches[0].clientX, { passive: true });
+  track.addEventListener('touchend', e => {
+    const delta = e.changedTouches[0].clientX - startX;
+    if (delta > 50) prevSlide();
+    else if (delta < -50) nextSlide();
+  }, { passive: true });
 
-        // Scroll infinito
-        if (currentPosition < 0) {
-          currentPosition = maxPosition;
-        } else if (currentPosition > maxPosition) {
-          currentPosition = 0;
-        }
-      }
+  // Eventos
+  nextBtn.addEventListener('click', nextSlide);
+  prevBtn.addEventListener('click', prevSlide);
+  carousel.addEventListener('mouseenter', stopAutoplay);
+  carousel.addEventListener('mouseleave', startAutoplay);
+  window.addEventListener('resize', () => {
+    createDots();
+    updateCarousel();
+  });
 
-      const moveX = cardWidth * currentPosition;
-      track.style.transform = translateX(-${moveX}px);
-      updateIndicators();
-    }
-
-    function startAutoplay() {
-      autoplayInterval = setInterval(() => {
-        moveCarousel(1);
-      }, 4000);
-    }
-
-    function stopAutoplay() {
-      clearInterval(autoplayInterval);
-    }
-
-    // Swipe para mobile
-    let startX = 0;
-
-    wrapper.addEventListener("touchstart", (e) => {
-      startX = e.touches[0].clientX;
-      stopAutoplay();
-    });
-
-    wrapper.addEventListener("touchend", (e) => {
-      const endX = e.changedTouches[0].clientX;
-      const diff = endX - startX;
-
-      if (Math.abs(diff) > 50) {
-        if (diff > 0) {
-          moveCarousel(-1);
-        } else {
-          moveCarousel(1);
-        }
-      }
-
-      startAutoplay();
-    });
-
-    window.addEventListener("resize", () => {
-      moveCarousel(0);
-    });
-
-    container.addEventListener("mouseenter", stopAutoplay);
-    container.addEventListener("mouseleave", startAutoplay);
-
-    window.addEventListener("DOMContentLoaded", () => {
-      cards = track.querySelectorAll(".blog-card");
-      moveCarousel(0);
-      startAutoplay();
-    });
-  </script>
+  // Inicializar
+  createDots();
+  updateCarousel();
+  startAutoplay();
+</script>
 
 </body>
 </html>
