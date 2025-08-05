@@ -146,79 +146,7 @@
 
     <div class="carousel-track-wrapper" id="carouselWrapper">
       <div class="carousel-track" id="carouselTrack">
-        
-<div class="blog-card">
-        <a href="https://yaniariadnacomunidad.com/blog/sabias-que-excel-y-power-bi-ya-tienen-inteligencia-artificial-integrada">
-          <img class="blog-image" src="https://lh3.googleusercontent.com/d/1QLvy8KXweqyDci8FvtvsuiZwHXeF6gul" alt="Post 1">
-          <h3 class="blog-title">¿Sabías que Excel y Power BI ya tienen inteligencia artificial integrada?</h3>
-          <p class="blog-description">La inteligencia artificial dejó de ser algo lejano o exclusivo de especialistas.</p>
-        </a>
-      </div>
-
-      <div class="blog-card">
-        <a href="https://yaniariadnacomunidad.com/blog/definir-bien-una-variable-es-un-acto-de-pensamiento-critico">
-          <img class="blog-image" src="https://lh3.googleusercontent.com/d/1qOEejKmOJCtB3--DZCjuAFtXKb2u-2rW" alt="Post 2">
-          <h3 class="blog-title">Definir bien una variable es un acto de pensamiento crítico</h3>
-          <p class="blog-description">Si una #variable está mal definida, no importa cuántos datos tengas: el análisis va a estar sesgado, incompleto o directamente equivocado😯</p>
-        </a>
-      </div>
-
-      <div class="blog-card">
-        <a href="https://yaniariadnacomunidad.com/blog/formato-tabular-que">
-          <img class="blog-image" src="https://lh3.googleusercontent.com/d/1ckMNTBc1woT8itpidYfaLKSkIPw84voD" alt="Post 3">
-          <h3 class="blog-title">Formato Tabular ¿qué?</h3>
-          <p class="blog-description">El formato tabular permite construir modelos escalables, visualizar sin errores y aplicar transformaciones en lote.</p>
-        </a>
-      </div>
-
-      <div class="blog-card">
-        <a href="https://yaniariadnacomunidad.com/blog/que-hacemos-en-power-query">
-          <img class="blog-image" src="https://lh3.googleusercontent.com/d/1lrrGRV0VjrBRK6gAVh3cqN5f4fsKniUJ" alt="Post 4">
-          <h3 class="blog-title">¿Qué hacemos en Power Query?</h3>
-          <p class="blog-description">Power Query se conecta a Excel, carpetas, bases, APIs, lo que sea. Pero lo importante no es solo traer los datos: es arreglar lo que viene mal desde el minuto cero.</p>
-        </a>
-      </div>
-
-      <div class="blog-card">
-        <a href="https://yaniariadnacomunidad.com/blog/power-query-para-excel-y-power-bi">
-          <img class="blog-image" src="https://lh3.googleusercontent.com/d/1pCMGKIhtTITkoVwSxuSI5lyfi9qvj8Tm" alt="Post 5">
-          <h3 class="blog-title">Power Query para Excel y Power BI</h3>
-          <p class="blog-description">Si hacés lo mismo más de dos veces en Excel, es hora de automatizarlo con Power Query.</p>
-        </a>
-      </div>
-
-<div class="blog-card">
-        <a href="https://yaniariadnacomunidad.com/blog/etl-o-elt-la-diferencia-que-puede-cambiar-tus-proyectos-de-datos-para-siempre">
-          <img class="blog-image" src="https://lh3.googleusercontent.com/d/1H-OxohLM02puRkmq0VW88Cv0yOEHi8gS" alt="Post 6">
-          <h3 class="blog-title">Power Query para Excel y Power BI</h3>
-          <p class="blog-description">Si hacés lo mismo más de dos veces en Excel, es hora de automatizarlo con Power Query.</p>
-        </a>
-      </div>
-
-<div class="blog-card">
-        <a href="https://yaniariadnacomunidad.com/blog/mi-flujo-de-trabajo-en-power-bi">
-          <img class="blog-image" src="https://lh3.googleusercontent.com/d/1e14PpCqtFE7_RKp56zilTJ9jOgY4FOmb" alt="Post 7">
-          <h3 class="blog-title">¿ETL o ELT? La diferencia que puede cambiar tus proyectos de datos para siempre</h3>
-          <p class="blog-description">Dos caminos, un mismo objetivo: tener datos listos para decidir. La clave está en el orden: ¿primero limpio o primero cargo?</p>
-        </a>
-      </div>
-
-<div class="blog-card">
-        <a href="https://yaniariadnacomunidad.com/blog/entendamos-la-logica-de-dax">
-          <img class="blog-image" src="https://lh3.googleusercontent.com/d/12kolfaBtlAUTNXAk2DZ3lZy-aRXp2Zdg" alt="Post 8">
-          <h3 class="blog-title">Mi flujo de trabajo en Power BI</h3>
-          <p class="blog-description">El proceso de trabajo en Power BI puede dividirse en 8 etapas principales, desde la conexión a los datos hasta la publicación de reportes interactivos y el feedback que genera.</p>
-        </a>
-      </div>
-
-<div class="blog-card">
-        <a href="https://yaniariadnacomunidad.com/blog/https-yaniariadnacomunidad-com-blog-dax">
-          <img class="blog-image" src="https://lh3.googleusercontent.com/d/1PdGPkbgDBc_BZ8C6hMJ0rzN5yKSJAxcJ" alt="Post 9">
-          <h3 class="blog-title">Entendamos la lógica de DAX en Power BI</h3>
-          <p class="blog-description">Una explicación clara de dos conceptos claves en DAX que transforman por completo la forma en que se entiende un cálculo: las variables y los contextos de evaluación.</p>
-        </a>
-      </div>
-
+        <!-- ACA VAN LOS CARDS DEL BLOG (ya incluidos en tu HTML) -->
       </div>
     </div>
 
@@ -236,6 +164,7 @@
     let cards = track.querySelectorAll(".blog-card");
     let currentPosition = 0;
     let autoplayInterval = null;
+    let autoplayResumeTimeout = null;
 
     function getVisibleCards() {
       return window.innerWidth <= 768 ? 1 : 3;
@@ -259,7 +188,17 @@
       }
     }
 
+    function restartAutoplayWithDelay() {
+      clearInterval(autoplayInterval);
+      clearTimeout(autoplayResumeTimeout);
+      autoplayResumeTimeout = setTimeout(() => {
+        startAutoplay();
+      }, 5000); // 5 segundos de pausa
+    }
+
     function moveCarousel(direction) {
+      restartAutoplayWithDelay(); // se reinicia autoplay con retardo
+
       const cardWidth = cards[0].offsetWidth;
       const visibleCards = getVisibleCards();
       const maxPosition = cards.length - visibleCards;
@@ -276,7 +215,7 @@
       }
 
       const moveX = cardWidth * currentPosition;
-      track.style.transform = translateX(-${moveX}px);
+      track.style.transform = `translateX(-${moveX}px)`;
       updateIndicators();
     }
 
@@ -292,7 +231,6 @@
 
     // Swipe para mobile
     let startX = 0;
-
     wrapper.addEventListener("touchstart", (e) => {
       startX = e.touches[0].clientX;
       stopAutoplay();
@@ -310,7 +248,7 @@
         }
       }
 
-      startAutoplay();
+      restartAutoplayWithDelay();
     });
 
     window.addEventListener("resize", () => {
@@ -326,6 +264,5 @@
       startAutoplay();
     });
   </script>
-
 </body>
 </html>
